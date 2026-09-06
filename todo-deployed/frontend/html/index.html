@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo List — DOM / Fetch / Callbacks Practice</title>
+  <link rel="stylesheet" href="../css/index.css" />
+</head>
+<body>
+
+  <main class="app">
+    <header class="app-header">
+      <h1>Todo List</h1>
+      <p class="subtitle">Practice project: DOM · fetch/async-await · callbacks</p>
+    </header>
+
+    <!-- ============ SEARCH (DOM + debounce callback from callbacks.js) ============ -->
+    <div class="search-wrap">
+      <span class="search-icon" aria-hidden="true">&#128269;</span>
+      <input
+        type="text"
+        id="search-input"
+        class="search-input"
+        placeholder="Search todos..."
+        autocomplete="off"
+      />
+    </div>
+
+    <!-- ============ FILTER BUTTONS (DOM + callbacks) ============ -->
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="active">Active</button>
+      <button class="filter-btn" data-filter="completed">Completed</button>
+      <button class="filter-btn" data-filter="saved">Saved</button>
+    </div>
+
+    <!-- ============ STATUS AREA (loading / error messages) ============ -->
+    <p id="status" class="status"></p>
+
+    <!-- ============ LIST (rendered dynamically via DOM) ============ -->
+    <ul id="todo-list" class="todo-list"></ul>
+
+    <p class="counter" id="counter"></p>
+
+    <!-- ============ FORM (DOM + event listener callback) ============ -->
+    <form id="todo-form" class="todo-form">
+      <input
+        type="text"
+        id="todo-input"
+        placeholder="What do you need to do?"
+        autocomplete="off"
+        required
+      />
+      <button type="submit">Add</button>
+    </form>
+  </main>
+
+  <!--
+    Load order matters here (no bundler, no modules, keep it simple for class):
+    1. callbacks.js  -> generic callback helpers (no DOM/fetch knowledge needed)
+    2. dom.js        -> functions that read/write the page (uses callbacks.js)
+    3. api.js        -> fetch/async-await calls to our backend
+    4. app.js        -> wires everything together (the "controller")
+  -->
+  <script src="../js/callbacks.js"></script>
+  <script src="../js/dom.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/app.js"></script>
+</body>
+</html>
